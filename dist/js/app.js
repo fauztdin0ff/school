@@ -427,14 +427,51 @@ function initSplideSlider(selector, options = {}) {
 /*==========================================================================
 Map
 ============================================================================*/
-if (typeof ymaps !== 'undefined') {
-   ymaps.ready(initMap);
-}
-
-function initMap() {
+function initLazyMap() {
    const mapEl = document.getElementById('map');
+
    if (!mapEl) return;
 
+   let mapLoaded = false;
+
+   const observer = new IntersectionObserver(
+      (entries) => {
+         const entry = entries[0];
+
+         if (!entry.isIntersecting || mapLoaded) return;
+
+         mapLoaded = true;
+         observer.disconnect();
+
+         loadYandexMap();
+      },
+      {
+         rootMargin: '300px'
+      }
+   );
+
+   observer.observe(mapEl);
+
+   function loadYandexMap() {
+      const script = document.createElement('script');
+
+      script.src =
+         'https://api-maps.yandex.ru/2.1/?lang=ru_RU';
+
+      script.onload = () => {
+         ymaps.ready(() => {
+            initMap(mapEl);
+
+            mapEl.classList.remove('map-skeleton');
+            mapEl.classList.add('map-loaded');
+         });
+      };
+
+      document.body.append(script);
+   }
+}
+
+function initMap(mapEl) {
    const lat = parseFloat(mapEl.dataset.lat);
    const lng = parseFloat(mapEl.dataset.lng);
 
@@ -447,27 +484,9 @@ function initMap() {
       zoom: 15
    });
 
-   let myPlacemark;
+   const placemark = new ymaps.Placemark(center);
 
-
-   function createPlacemark() {
-      if (myPlacemark) {
-         myMap.geoObjects.remove(myPlacemark);
-      }
-
-      myPlacemark = new ymaps.Placemark(center, {}, {
-         iconLayout: 'default#image',
-         balloonContent: 'Наш офис'
-      });
-
-      myMap.geoObjects.add(myPlacemark);
-   }
-
-   createPlacemark();
-
-   window.addEventListener('resize', () => {
-      createPlacemark();
-   });
+   myMap.geoObjects.add(placemark);
 }
 
 /*==========================================================================
@@ -497,7 +516,6 @@ function initGoTop() {
    toggleBtn();
 }
 
-initGoTop();
 
 /*==========================================================================
 Init
@@ -508,6 +526,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
    initFaqAccordion();
    initSplideSlider('.reviews__slider');
    initGoTop();
+   initLazyMap();
+
 })
 })();
 
