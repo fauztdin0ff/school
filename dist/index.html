@@ -17,9 +17,9 @@
    <meta property="og:type" content="website">
    <meta property="og:image" content="img/fav/og-image.jpg">
    <!-- Styles -->
-   <link rel="stylesheet" href="css/splide.min.css?_v=20260616103443">
-   <link rel="stylesheet" href="css/glightbox.min.css?_v=20260616103443">
-   <link rel="stylesheet" href="css/style.min.css?_v=20260616103443">
+   <link rel="stylesheet" href="css/splide.min.css?_v=20260617152727">
+   <link rel="stylesheet" href="css/glightbox.min.css?_v=20260617152727">
+   <link rel="stylesheet" href="css/style.min.css?_v=20260617152727">
    <title>Language School</title>
 
 </head>
@@ -50,6 +50,15 @@
                      <li class="menu__subitem">
                         <a href="#gallery" class="menu__sublink">Фотогалерея</a>
                      </li>
+                     <li class="menu__subitem">
+                        <a href="#faq" class="menu__sublink">FAQ</a>
+                     </li>
+                     <li class="menu__subitem">
+                        <a href="#reviews" class="menu__sublink">Отзывы</a>
+                     </li>
+                     <li class="menu__subitem">
+                        <a href="#contacts" class="menu__sublink">Контакты</a>
+                     </li>
                   </ul>
                </li>
                <li class="menu__item">
@@ -64,20 +73,19 @@
                      <li class="menu__subitem">
                         <a href="#for-schoolchildren" class="menu__sublink">Для школьников</a>
                      </li>
+                     <li class="menu__subitem">
+                        <a href="#additional" class="menu__sublink">Подготовка к школе</a>
+                     </li>
                   </ul>
                </li>
                <li class="menu__item">
                   <a href="#camp" class="menu__link">Летний лагерь</a>
-               </li>
-               <li class="menu__item">
-                  <a href="#additional" class="menu__link">Доп. услуги</a>
                </li>
             </ul>
             <div class="menu__call">
                <a href="#request" class="menu__call-link">Оставить заявку</a>
             </div>
          </nav>
-
       </div>
       <div class="header__tel">
          <a href="tel:83466290057" class="header__tel-link">
@@ -620,7 +628,7 @@
                      скидку 10%</div>
                   <div class="courses__request-subtitle">Оставляйте заявку до конца июня, а начинайте учиться, когда вам
                      будет удобнее.</div>
-                  <form class="courses__form">
+                  <form id="requestForm" class="courses__form">
                      <div class="courses__form-area">
                         <div class="courses__form-icon">
                            <svg>
@@ -649,7 +657,7 @@
                            placeholder="Ваше имя" required>
                      </div>
                      <div class="courses__form-submit">
-                        <button type="submit">Оставить заявку</button>
+                        <button type="submit" id="requestSubmit">Оставить заявку</button>
                      </div>
                      <div class="courses__form-agree">
                         <label class="agreement" for="agreeArea">
@@ -1268,11 +1276,31 @@
       </div>
    </div>
 </div>
+
+
+<!-- thanks-->
+<div id="thanks-popup" class="thanks-popup popup" role="dialog" aria-modal="true">
+   <div class="thanks-popup__body popup__body">
+      <div class="thanks-popup__icon">
+         <img src="img/icons/circle-check.svg" width="40" height="40" alt="icon">
+      </div>
+      <div class="thanks-popup__title">Спасибо за обращение!</div>
+      <div class="thanks-popup__subtitle">
+         Мы получили вашу заявку и скоро свяжемся с вами, чтобы обсудить все детали.
+      </div>
+      <div class="popup__close">
+         <svg>
+            <use xlink:href="img/icons/icons.svg#icon-plus"></use>
+         </svg>
+      </div>
+   </div>
+</div>
    
 
-   <script src="js/glightbox.min.js?_v=20260616103443"></script>
-   <script src="js/splide.min.js?_v=20260616103443"></script>
-   <script src="js/app.js?_v=20260616103443"></script>
+   <script src="js/glightbox.min.js?_v=20260617152727"></script>
+   <script src="js/splide.min.js?_v=20260617152727"></script>
+   <script src="js/app.js?_v=20260617152727"></script>
+
 </body>
 
 </html>

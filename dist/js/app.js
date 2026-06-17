@@ -516,6 +516,46 @@ function initGoTop() {
    toggleBtn();
 }
 
+/*==========================================================================
+Form send
+============================================================================*/
+function initRequestForm() {
+   const form = document.getElementById('requestForm');
+   const popup = document.getElementById('thanks-popup');
+
+   if (!form || !popup) return;
+
+   form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+
+      const formData = new FormData(form);
+
+      try {
+         const response = await fetch('send.php', {
+            method: 'POST',
+            body: formData
+         });
+
+         const result = await response.json();
+
+         if (result.status === 'success') {
+            form.reset();
+
+            popup.classList.add('show');
+         } else {
+            alert(result.message || 'Ошибка отправки');
+         }
+
+      } catch (err) {
+         alert('Ошибка сети');
+      } finally {
+         submitBtn.disabled = false;
+      }
+   });
+}
 
 /*==========================================================================
 Init
@@ -527,8 +567,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
    initSplideSlider('.reviews__slider');
    initGoTop();
    initLazyMap();
-
+   initRequestForm();
 })
+
 })();
 
 /******/ })()
