@@ -62,7 +62,6 @@ function burgerMenu() {
       const menuBody = document.querySelector(".menu__body");
       const body = document.body;
       const menuBodyClose = document.querySelector(".menu__body-close");
-      const animationDuration = 500;
 
       if (!menuIcon || !menuBody) return;
 
@@ -81,11 +80,7 @@ function burgerMenu() {
       menuBody.addEventListener("click", (e) => {
          const link = e.target.closest("a");
          if (link) {
-            e.preventDefault();
             closeMenu();
-            setTimeout(() => {
-               window.location.href = link.href;
-            }, animationDuration);
          }
       });
 
@@ -277,32 +272,6 @@ _modules_functions_js__WEBPACK_IMPORTED_MODULE_0__.popups();
 _modules_functions_js__WEBPACK_IMPORTED_MODULE_0__.phoneMask();
 
 /*==========================================================================
-Observer Animation
-============================================================================*/
-/* if (document.readyState === "complete") {
-   init();
-} else {
-   window.addEventListener("load", init);
-}
-
-function init() {
-   function onEntry(entry) {
-      entry.forEach(change => {
-         if (change.isIntersecting) {
-            change.target.classList.add('element-show');
-         }
-      });
-   }
-
-   let options = { threshold: [0.4] };
-   let observer = new IntersectionObserver(onEntry, options);
-   let elements = document.querySelectorAll('.element-animation');
-   for (let elm of elements) {
-      observer.observe(elm);
-   }
-} */
-
-/*==========================================================================
 Submenu
 ============================================================================*/
 function initSubmenu() {
@@ -321,7 +290,6 @@ function initSubmenu() {
 
       if (!sublist?.classList.contains('menu__sublist')) return;
 
-      // Закрываем остальные подменю и кнопки
       document.querySelectorAll('.menu__sublist.active').forEach(item => {
          if (item !== sublist) {
             item.classList.remove('active');
@@ -506,15 +474,9 @@ function initGoTop() {
 
    window.addEventListener('scroll', toggleBtn);
 
-   btn.addEventListener('click', () => {
-      window.scrollTo({
-         top: 0,
-         behavior: 'smooth'
-      });
-   });
-
    toggleBtn();
 }
+
 
 /*==========================================================================
 Form send
